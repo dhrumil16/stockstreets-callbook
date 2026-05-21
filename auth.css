@@ -1253,6 +1253,9 @@ input:focus {
 
 /* Mobile responsive options grid */
 @media (max-width: 640px) {
+    body {
+        flex-direction: column;
+    }
     .options-grid {
         grid-template-columns: 1fr;
         padding: 0 10px;
