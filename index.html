@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stock Streets - Premium Trading Ecosystem</title>
+    <link rel="icon" type="image/png" href="logo.png" />
+    <link rel="stylesheet" href="landing.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <!-- =========================================
+       NAVIGATION
+       ========================================= -->
+    <header>
+      <div class="container nav-container">
+        <div class="logo-wrap">
+          <img src="logo.png" alt="Stock Streets Logo" />
+        </div>
+        <nav>
+          <ul>
+            <li><a href="#hubs">Products</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#support">Support</a></li>
+          </ul>
+        </nav>
+        <div class="nav-actions">
+          <a href="login.html" class="btn-login">Login</a>
+          <a href="signup.html" class="btn-primary">Signup</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- =========================================
+       HERO SECTION
+       ========================================= -->
+    <section class="hero">
+      <div class="container">
+        <h1>
+          An ecosystem built for <br /><span class="gradient-text"
+            >Traders and Investors
+          </span>
+        </h1>
+
+        <form id="onboardingForm">
+          <div class="hero-cta">
+            <input
+              type="tel"
+              id="ctaMobile"
+              placeholder="Enter Mobile Number"
+              maxlength="10"
+              required
+            />
+            <button type="submit" id="ctaSubmit">Get Started</button>
+          </div>
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 8px;
+              margin-top: -40px;
+              margin-bottom: 60px;
+              font-size: 13px;
+              color: var(--text-muted);
+            "
+          >
+            <input type="checkbox" id="ctaAgree" checked required />
+            <label for="ctaAgree"
+              >I agree to all the
+              <a
+                href="#"
+                style="color: var(--primary-light); text-decoration: none"
+                >Terms & Conditions</a
+              >
+              and
+              <a
+                href="#"
+                style="color: var(--primary-light); text-decoration: none"
+                >Privacy Policy</a
+              >.</label
+            >
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- =========================================
+       LIVE TICKER BAR
+       ========================================= -->
+    <div class="ticker-bar">
+      <div class="container">
+        <div class="ticker-flex">
+          <div class="ticker-item">
+            <span class="ticker-label">NIFTY 50</span>
+            <span class="ticker-price" id="niftyTicker">Loading...</span>
+          </div>
+          <div class="ticker-item">
+            <span class="ticker-label">SENSEX</span>
+            <span class="ticker-price" id="sensexTicker">Loading...</span>
+          </div>
+          <div class="ticker-item">
+            <span class="ticker-label">BANKNIFTY</span>
+            <span class="ticker-price" id="bankniftyTicker">Loading...</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================================
+       HUBS SECTION
+       ========================================= -->
+    <section class="hubs" id="hubs">
+      <div class="container">
+        <div class="hubs-grid">
+          <!-- Traders Hub (Red Theme) -->
+          <div class="hub-card red-theme glass-panel">
+            <h3>Traders Hub</h3>
+            <p>
+              Curated for trading enthusiasts, strategists & pro-traders. Access
+              advanced indicators, fast execution pipelines, and automated
+              strategy triggers.
+            </p>
+            <a href="signup.html" class="hub-link">
+              Click to Know More
+              <span class="material-symbols-outlined">arrow_right_alt</span>
+            </a>
+          </div>
+
+          <!-- Investors Home (Blue Theme - default) -->
+          <div class="hub-card glass-panel">
+            <h3>Investors Home</h3>
+            <p>
+              Guide for investment enthusiasts to explore technology & monitor
+              market. Build long-term wealth, manage portfolios, and get
+              intelligent alerts.
+            </p>
+            <a href="signup.html" class="hub-link">
+              Click to Know More
+              <span class="material-symbols-outlined">arrow_right_alt</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================
+       FOOTER
+       ========================================= -->
+    <footer>
+      <div class="container">
+        <div class="footer-top">
+          <div class="footer-brand">
+            <div
+              class="logo-wrap"
+              style="
+                display: inline-flex;
+                background: white;
+                padding: 8px 24px;
+                border-radius: 12px;
+              "
+            >
+              <img
+                src="logo.png"
+                alt="Stock Streets Logo"
+                style="height: 32px"
+              />
+            </div>
+            <p>
+              Elevating trading capabilities for retail developers and
+              institutional traders across India.
+            </p>
+          </div>
+          <div class="footer-links">
+            <h5>Company</h5>
+            <ul>
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </div>
+          <div class="footer-links">
+            <h5>Products</h5>
+            <ul>
+              <li><a href="#hubs">Trading Terminal</a></li>
+              <li><a href="#hubs">Investor Suite</a></li>
+              <li><a href="#hubs">Developer APIs</a></li>
+            </ul>
+          </div>
+          <div class="footer-links">
+            <h5>Legal</h5>
+            <ul>
+              <li><a href="#">Terms of Use</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Disclaimer</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>
+            Disclaimer: Investment in securities market are subject to market
+            risks. Read all the related documents carefully before investing.
+            Stock Streets is a technological service platform providing
+            analytical tools and integrations.
+          </p>
+          <p>&copy; 2026 Stock Streets. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- =========================================
+       JAVASCRIPT CODE
+       ========================================= -->
+    <script src="config.js"></script>
+    <script>
+      // 1. Onboarding Redirect logic
+      const onboardingForm = document.getElementById("onboardingForm");
+      const ctaMobile = document.getElementById("ctaMobile");
+
+      // Only allow digits inside mobile input
+      ctaMobile.addEventListener("input", (e) => {
+        e.target.value = e.target.value.replace(/\D/g, "");
+      });
+
+      onboardingForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const mobileNumber = ctaMobile.value;
+        if (mobileNumber.length === 10) {
+          window.location.href = `signup.html?mobile=${encodeURIComponent(mobileNumber)}`;
+        } else {
+          alert("Please enter a valid 10-digit mobile number.");
+        }
+      });
+
+      // 2. Fetch Index Data
+      async function fetchYahooIndex(symbol) {
+        const url = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(symbol)}`;
+        const response = await fetch(
+          `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
+        );
+        if (!response.ok) throw new Error(`Yahoo fetch failed for ${symbol}`);
+        const json = await response.json();
+        const data = JSON.parse(json.contents);
+        if (
+          !data ||
+          !data.chart ||
+          !data.chart.result ||
+          !data.chart.result[0]
+        ) {
+          throw new Error(`Invalid Yahoo data for ${symbol}`);
+        }
+        const meta = data.chart.result[0].meta;
+        const close = meta.regularMarketPrice || 0;
+        const prevClose = meta.previousClose || 0;
+        const diff = close - prevClose;
+        return { close, diff };
+      }
+
+      async function updateIndexTicker() {
+        const niftyEl = document.getElementById("niftyTicker");
+        const sensexEl = document.getElementById("sensexTicker");
+        const bankniftyEl = document.getElementById("bankniftyTicker");
+
+        let niftyData = null;
+        let sensexData = null;
+        let bankniftyData = null;
+
+        // Try local API first
+        try {
+          const response = await fetch(`${CONFIG.API_BASE_URL}/marketwatch`);
+          if (response.ok) {
+            const data = await response.json();
+            const list = data.Data || data || [];
+
+            const niftyCandidates = [
+              "NIFTY50_ETF",
+              "Nifty50_ETF",
+              "NIFTY_50_ETF",
+              "NIFTY50",
+              "NIFTY 50",
+              "NIFTY_50",
+              "NIFTY",
+              "NIFTYBEES",
+            ];
+            let niftyItem = list.find((item) =>
+              niftyCandidates.includes(item.Symbol),
+            );
+            if (!niftyItem && list.length > 0) {
+              niftyItem = list.find(
+                (item) =>
+                  item.Symbol &&
+                  item.Symbol.toLowerCase().includes("nifty") &&
+                  !item.Symbol.toLowerCase().includes("bank"),
+              );
+            }
+
+            const sensexCandidates = [
+              "SENSEX_ETF",
+              "Sensex_ETF",
+              "SENSEX_30_ETF",
+              "SENSEX",
+              "SENSEX 30",
+              "SENSEX_30",
+              "Sensex",
+            ];
+            let sensexItem = list.find((item) =>
+              sensexCandidates.includes(item.Symbol),
+            );
+            if (!sensexItem && list.length > 0) {
+              sensexItem = list.find(
+                (item) =>
+                  item.Symbol && item.Symbol.toLowerCase().includes("sensex"),
+              );
+            }
+
+            const bankniftyCandidates = [
+              "BANKNIFTY",
+              "BANK_NIFTY",
+              "NIFTYBANK",
+              "NIFTY BANK",
+              "NIFTY_BANK",
+              "BANKNIFTY_ETF",
+              "BANKBEES",
+            ];
+            let bankniftyItem = list.find((item) =>
+              bankniftyCandidates.includes(item.Symbol),
+            );
+            if (!bankniftyItem && list.length > 0) {
+              bankniftyItem = list.find(
+                (item) =>
+                  item.Symbol &&
+                  (item.Symbol.toLowerCase().includes("banknifty") ||
+                    item.Symbol.toLowerCase().includes("niftybank") ||
+                    item.Symbol.toLowerCase().includes("bankbees")),
+              );
+            }
+
+            if (niftyItem) {
+              const close = parseFloat(niftyItem.Close) || 0;
+              const diff = parseFloat(niftyItem.Diff) || 0;
+              const scale = close < 1000 ? 100 : 1;
+              niftyData = { close: close * scale, diff: diff * scale };
+            }
+            if (sensexItem) {
+              const close = parseFloat(sensexItem.Close) || 0;
+              const diff = parseFloat(sensexItem.Diff) || 0;
+              const scale = close < 1000 ? 100 : 1;
+              sensexData = { close: close * scale, diff: diff * scale };
+            }
+            if (bankniftyItem) {
+              const close = parseFloat(bankniftyItem.Close) || 0;
+              const diff = parseFloat(bankniftyItem.Diff) || 0;
+              const scale = close < 1000 ? 100 : 1;
+              bankniftyData = { close: close * scale, diff: diff * scale };
+            }
+          }
+        } catch (err) {
+          console.warn(
+            "Local index fetch failed, switching to Yahoo Finance fallback",
+            err,
+          );
+        }
+
+        // Fallbacks
+        if (!niftyData) {
+          try {
+            niftyData = await fetchYahooIndex("^NSEI");
+          } catch (e) {
+            console.warn(
+              "Yahoo Nifty 50 spot fetch failed, trying Nifty BeES fallback",
+              e,
+            );
+            try {
+              const bees = await fetchYahooIndex("NIFTYBEES.NS");
+              if (bees) {
+                niftyData = {
+                  close: bees.close * 100,
+                  diff: bees.diff * 100,
+                };
+              }
+            } catch (err) {
+              console.error("Nifty BeES fallback failed too", err);
+            }
+          }
+        }
+        if (!sensexData) {
+          try {
+            sensexData = await fetchYahooIndex("^BSESN");
+          } catch (e) {
+            console.error(e);
+          }
+        }
+        if (!bankniftyData) {
+          try {
+            bankniftyData = await fetchYahooIndex("^NSEBANK");
+          } catch (e) {
+            console.error(e);
+          }
+        }
+
+        // Render
+        const renderTick = (el, label, data) => {
+          if (!el || !data) return;
+          const price = data.close.toFixed(2);
+          const diff = data.diff.toFixed(2);
+          const sign = data.diff >= 0 ? "+" : "";
+
+          el.innerHTML = `${price} <span class="ticker-diff ${data.diff >= 0 ? "up" : "down"}">${sign}${diff}</span>`;
+        };
+
+        renderTick(niftyEl, "NIFTY 50", niftyData);
+        renderTick(sensexEl, "SENSEX", sensexData);
+        renderTick(bankniftyEl, "BANKNIFTY", bankniftyData);
+      }
+
+      // Run index fetch and repeat every 30s
+      updateIndexTicker();
+      setInterval(updateIndexTicker, 30000);
+    </script>
+  </body>
+</html>
+

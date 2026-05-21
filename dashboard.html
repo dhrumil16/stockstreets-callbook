@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stock Streets CallBook</title>
+    <link rel="icon" type="image/png" href="logo.png" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="h-screen flex flex-col text-xs select-none font-['Inter',sans-serif] bg-[#121212] text-[#e0e0e0]">
+    <!-- Top Navigation Bar -->
+    <header class="bg-[#121212] border-b border-[#262626] flex flex-col">
+      <!-- Top Title Row -->
+      <div class="flex flex-col sm:flex-row items-center justify-between px-2 sm:px-4 py-3 sm:py-2 gap-3 sm:gap-0 bg-[#121212] border-b border-[#222]">
+        <div class="flex items-center bg-white rounded-[12px] px-[24px] py-[8px] shadow-sm">
+          <img src="logo.png" alt="Stock Streets" class="h-12 object-contain" />
+        </div>
+        <div class="flex flex-wrap sm:flex-nowrap justify-center items-center gap-2 sm:gap-4 w-full sm:w-auto">
+          <div class="flex items-center gap-2 sm:gap-3 bg-[#1e1e1e] border border-[#2a2a2a] px-2 sm:px-3 py-1 rounded-lg overflow-x-auto sm:overflow-visible whitespace-nowrap hide-scrollbar max-w-full text-[10px] sm:text-xs">
+            <span id="niftyTicker" class="text-profit font-semibold font-mono">NIFTY Loading...</span>
+            <span class="text-gray-600">|</span>
+            <span id="sensexTicker" class="text-profit font-semibold font-mono">SENSEX Loading...</span>
+            <span class="text-gray-600">|</span>
+            <span id="bankniftyTicker" class="text-profit font-semibold font-mono">BANKNIFTY Loading...</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <div
+              class="bg-emerald-500 text-black px-2.5 py-0.5 rounded-full font-bold text-[10px] flex items-center gap-1 shadow-sm shadow-emerald-500/20 whitespace-nowrap"
+            >
+              <span class="w-1.5 h-1.5 rounded-full bg-black animate-pulse"></span>
+              Live Mode
+            </div>
+            <button
+              id="logoutBtn"
+              class="bg-red-600/90 hover:bg-red-700 text-white px-2 sm:px-3 py-1 rounded-lg text-xs font-semibold cursor-pointer transition-colors inline-flex items-center gap-1.5 whitespace-nowrap"
+            >
+              Logout
+              <span class="material-symbols-outlined" style="font-size: 14px; line-height: 1;">logout</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Toolbar Row -->
+      <div class="flex items-center gap-2 px-2 sm:px-4 py-1.5 bg-[#181818] border-b border-[#262626] overflow-x-auto sm:overflow-visible whitespace-nowrap hide-scrollbar">
+        <!-- Main Navigation Buttons -->
+        <button
+          id="navBlankMarketWatchBtn"
+          class="nav-tab-btn active"
+        >
+          Blank Market Watch
+        </button>
+
+        <!-- NSE Dropdown Menu -->
+        <div class="relative inline-block text-left">
+          <button
+            id="navNseDropdownBtn"
+            class="nav-tab-btn flex items-center gap-1 cursor-pointer"
+          >
+            NSE <span class="text-[9px]">▼</span>
+          </button>
+          <div
+            id="nseDropdownMenu"
+            class="hidden absolute left-0 mt-1.5 w-40 bg-[#1a1a1a] border border-[#2a2a2a] shadow-2xl z-50 rounded-lg overflow-hidden backdrop-blur-md"
+          >
+            <a
+              href="#"
+              class="block px-4 py-2.5 text-xs text-[#e0e0e0] hover:bg-[#0997d7]/10 hover:text-[#0997d7] border-b border-[#222] transition-colors"
+              data-index="nifty50"
+              >NIFTY50</a
+            >
+            <a
+              href="#"
+              class="block px-4 py-2.5 text-xs text-[#e0e0e0] hover:bg-[#0997d7]/10 hover:text-[#0997d7] border-b border-[#222] transition-colors"
+              data-index="niftynext50"
+              >NIFTYNEXT50</a
+            >
+            <a
+              href="#"
+              class="block px-4 py-2.5 text-xs text-[#e0e0e0] hover:bg-[#0997d7]/10 hover:text-[#0997d7] border-b border-[#222] transition-colors"
+              data-index="midcap"
+              >MIDCAP</a
+            >
+            <a
+              href="#"
+              class="block px-4 py-2.5 text-xs text-[#e0e0e0] hover:bg-[#0997d7]/10 hover:text-[#0997d7] transition-colors"
+              data-index="smallcap"
+              >SMALLCAP</a
+            >
+          </div>
+        </div>
+
+        <button
+          id="navReportsBtn"
+          class="nav-tab-btn"
+        >
+          Reports
+        </button>
+
+        <!-- Separator -->
+        <div class="w-[1px] h-8 bg-[#555] mx-1"></div>
+
+        <button
+          id="openAddScriptBtn"
+          class="flex flex-col items-center px-4 py-1.5 hover:bg-[#4a4a4a] rounded-lg cursor-pointer border border-transparent hover:border-[#666] transition-all"
+        >
+          <div class="text-[#0997d7] text-[16px] leading-none mb-0.5">+</div>
+          <span class="text-[13px] font-semibold text-white">Add Scrip</span>
+        </button>
+
+        <!-- Separator -->
+        <div class="w-[1px] h-8 bg-[#555] mx-1"></div>
+
+        <button
+          id="settingsBtn"
+          class="flex flex-col items-center px-4 py-1.5 hover:bg-[#4a4a4a] rounded-lg cursor-pointer border border-transparent hover:border-[#666] text-gray-400 transition-all"
+        >
+          <div class="text-[16px] leading-none mb-0.5">⚙</div>
+          <span class="text-[13px] font-semibold text-white">Settings</span>
+        </button>
+      </div>
+
+      <!-- Workspace Tab Bar -->
+      <div id="workspaceTabBar" class="workspace-tab-container overflow-x-auto sm:overflow-visible whitespace-nowrap hide-scrollbar">
+        <!-- Tabs injected by JS -->
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 overflow-auto bg-[#1e1e1e] relative p-1 flex flex-col">
+      <!-- Market Watch View -->
+      <div id="marketWatchContainer" class="w-full flex-1 overflow-auto" style="-webkit-overflow-scrolling: touch;">
+        <table class="market-watch-table w-full text-left border-collapse">
+          <thead>
+            <tr>
+              <th style="width: 12%;">Symbol</th>
+              <th style="width: 18%;">Industry</th>
+              <th style="width: 8%; text-align: right;">Change %</th>
+              <th style="width: 8%; text-align: right;">Diff</th>
+              <th style="width: 8%; text-align: right;">Close</th>
+              <th style="width: 8%; text-align: right;">Open</th>
+              <th style="width: 8%; text-align: right;">High</th>
+              <th style="width: 8%; text-align: right;">Low</th>
+              <th style="width: 12%; text-align: right;">Volume</th>
+              <th style="width: 10%; text-align: center;">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="marketWatchBody">
+            <!-- Rows will be populated by JS -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Reports View -->
+      <div id="reportsContainer" class="w-full flex-1 hidden flex-col overflow-auto" style="-webkit-overflow-scrolling: touch;">
+        <!-- Order History Sub-Navbar -->
+        <div class="workspace-tab-container border-b-0 mb-1 flex justify-between items-center pr-3">
+          <div class="flex">
+            <div class="workspace-tab active">Order History</div>
+          </div>
+          <button id="exportExcelBtn" class="bg-[#0997d7]/10 hover:bg-[#0997d7]/20 border border-[#0997d7]/30 hover:border-[#0997d7] text-[#0997d7] text-xs font-semibold px-3 py-1 rounded transition-colors flex items-center gap-1.5 cursor-pointer">
+            <span class="material-symbols-outlined" style="font-size: 14px; line-height: 1;">download</span>
+            Export to Excel
+          </button>
+        </div>
+        <!-- Order History Table -->
+        <table class="market-watch-table w-full text-left border-collapse mt-2">
+          <thead>
+            <tr>
+              <th>DOA</th>
+              <th>Symbol</th>
+              <th>Call Type</th>
+              <th>Entry Price</th>
+              <th>Target 1</th>
+              <th>Target 2</th>
+              <th>Stop Loss</th>
+              <th>Status</th>
+              <th>Risk</th>
+              <th>Reward</th>
+              <th>Status Date</th>
+            </tr>
+          </thead>
+          <tbody id="orderHistoryBody">
+            <!-- Rows populated by JS -->
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <!-- Status Bar -->
+    <footer
+      class="bg-[#2a2a2a] border-t border-[#555] flex items-center justify-between px-2 py-1 text-[10px] text-gray-400"
+    >
+      <div>
+        Prices For 52 Week High and 52 Week Low are adjusted for Corporate
+        Action
+      </div>
+      <div>01/01/2026 10:00:00</div>
+    </footer>
+
+    <!-- Overlay for Modals -->
+    <div
+      id="modalOverlay"
+      class="fixed inset-0 bg-black bg-opacity-30 hidden z-40"
+    ></div>
+
+    <!-- Settings Modal -->
+    <div
+      id="settingsModal"
+      class="hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[95%] sm:w-[350px] z-50 flex flex-col shadow-2xl bg-[#1a1a1a] border border-[#2a2a2a] rounded-2xl overflow-hidden"
+    >
+      <div class="modal-title-bar cursor-move" id="settingsTitleBar">
+        <span>Settings / Profile</span>
+        <button
+          class="bg-[#262626] text-[#94a3b8] font-bold hover:bg-red-500 hover:text-white rounded-full w-6 h-6 flex items-center justify-center transition-colors"
+          id="closeSettingsBtn"
+        >
+          X
+        </button>
+      </div>
+      <div class="p-5 flex flex-col gap-4">
+        <h3
+          class="text-white font-bold text-base border-b border-[#262626] pb-2"
+        >
+          User Profile
+        </h3>
+
+        <div class="flex flex-col gap-1.5">
+          <label class="text-[#94a3b8] font-semibold text-xs">Full Name:</label>
+          <div
+            id="profileFullName"
+            class="font-semibold text-white bg-[#121212] px-3 py-2 border border-[#262626] rounded-lg text-sm shadow-inner"
+          >
+            -
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-1.5">
+          <label class="text-[#94a3b8] font-semibold text-xs">User ID:</label>
+          <div
+            id="profileUserId"
+            class="font-semibold text-[#94a3b8] bg-[#161616] px-3 py-2 border border-[#222] rounded-lg text-sm shadow-inner"
+          >
+            -
+          </div>
+        </div>
+
+        <h3
+          class="text-white font-bold text-base border-b border-[#262626] pb-2 mt-2"
+        >
+          Preferences
+        </h3>
+
+        <div class="flex items-center justify-between">
+          <label class="text-[#94a3b8] font-semibold text-xs mb-0">Theme Mode:</label>
+          <button
+            id="themeToggleBtn"
+            class="px-3 py-1.5 bg-[#262626] text-white hover:bg-[#333] border border-[#3c3c3c] rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
+          >
+            <span id="themeToggleIcon" class="material-symbols-outlined" style="font-size: 14px; line-height: 1;">light_mode</span>
+            <span id="themeToggleText">Light Mode</span>
+          </button>
+        </div>
+
+        <p class="text-gray-500 text-xs mt-2 italic">
+          Note: Additional settings features will be available in future
+          updates.
+        </p>
+      </div>
+    </div>
+
+    <!-- Add Script Modal -->
+    <div
+      id="addScriptModal"
+      class="add-script-modal hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[95%] sm:w-[450px] z-50 flex flex-col shadow-2xl rounded-2xl overflow-hidden"
+    >
+      <div class="modal-title-bar cursor-move" id="addScriptTitleBar">
+        <span>Add Scrip</span>
+        <button
+          class="bg-[#262626] text-[#94a3b8] font-bold hover:bg-red-500 hover:text-white rounded-full w-6 h-6 flex items-center justify-center transition-colors"
+          id="closeAddScriptBtn"
+        >
+          X
+        </button>
+      </div>
+      <div class="p-4 flex flex-col gap-3">
+        <!-- Search Input Area -->
+        <div class="flex items-center gap-3">
+          <label class="text-[#94a3b8] font-semibold whitespace-nowrap"
+            >Scrip Name / Code :</label
+          >
+          <input
+            type="text"
+            id="scripSearchInput"
+            class="desktop-input flex-1"
+            placeholder="Type company name... (e.g., Reliance)"
+          />
+        </div>
+
+        <!-- Search Results Table -->
+        <div
+          class="bg-[#121212] text-white h-48 overflow-y-auto border border-[#262626] rounded-xl mt-1"
+        >
+          <table class="w-full text-left border-collapse text-xs">
+            <thead class="bg-[#181818] sticky top-0 border-b border-[#262626]">
+              <tr>
+                <th class="p-2 border-r border-[#262626] text-[#94a3b8] font-semibold">Exchange</th>
+                <th class="p-2 text-[#94a3b8] font-semibold">Scrip Name</th>
+              </tr>
+            </thead>
+            <tbody id="searchResultsBody" class="divide-y divide-[#1e1e1e]">
+              <!-- Search results populated by JS -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="flex justify-between items-center mt-2">
+          <div></div>
+          <div class="flex gap-2">
+            <button id="addSelectedScripBtn" class="desktop-btn w-20" disabled>
+              Add
+            </button>
+            <button id="closeAddScriptBtn2" class="desktop-btn w-20">
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Order Modal (Buy/Sell combined structure, styled via JS class toggling) -->
+    <div
+      id="orderModal"
+      class="order-modal hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[95%] sm:w-[550px] max-h-[90vh] overflow-y-auto z-50 flex flex-col shadow-2xl rounded-2xl"
+    >
+      <div
+        class="bg-[#181818] text-white p-3 px-4 font-bold text-sm flex justify-between items-center border-b border-[#262626]"
+        id="orderModalTopBar"
+      >
+        <span>New Order</span>
+        <div class="flex items-center gap-3">
+          <span id="orderModalExchangeInfo" class="text-xs font-semibold text-[#94a3b8]">NSE: 0.00 BSE: 0.00</span>
+          <button
+            class="bg-[#262626] text-[#94a3b8] hover:bg-red-600 hover:text-white w-6 h-6 rounded-full flex items-center justify-center font-bold cursor-pointer transition-colors"
+            id="closeOrderModalBtn"
+          >
+            X
+          </button>
+        </div>
+      </div>
+
+      <div class="p-4 bg-[#1a1a1a]">
+
+        <!-- Form Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-5 gap-2.5 mb-4 text-[10px]">
+          <div class="flex flex-col gap-1">
+            <label class="text-[#94a3b8] font-semibold">Order Type</label>
+            <select id="orderType" class="desktop-select font-bold" disabled>
+              <option value="Buy">Buy</option>
+              <option value="Sell">Sell</option>
+            </select>
+          </div>
+          <div class="flex flex-col gap-1">
+            <label class="text-[#94a3b8] font-semibold">Student Name</label>
+            <input
+              type="text"
+              id="studentName"
+              class="desktop-input w-full"
+              readonly
+            />
+          </div>
+          <div class="flex flex-col gap-1">
+            <label class="text-[#94a3b8] font-semibold">Symbol / Stock Name</label>
+            <input
+              type="text"
+              id="orderScrip"
+              class="desktop-input w-full font-bold"
+              readonly
+            />
+          </div>
+          <div class="flex flex-col gap-1">
+            <label class="text-[#94a3b8] font-semibold">Call Type</label>
+            <select id="callType" class="desktop-select w-full" disabled>
+              <option value="LONG">LONG</option>
+              <option value="SHORT">SHORT</option>
+            </select>
+          </div>
+          <div class="flex flex-col gap-1">
+            <label class="text-[#94a3b8] font-semibold">Entry Price</label>
+            <input
+              type="number"
+              id="entryPrice"
+              class="desktop-input w-full text-right"
+              value="0"
+              step="0.05"
+            />
+          </div>
+          <div class="flex flex-col gap-1">
+            <label class="text-[#94a3b8] font-semibold">Target 1</label>
+            <input
+              type="number"
+              id="target1"
+              class="desktop-input w-full text-right"
+              value="0"
+              step="0.05"
+            />
+          </div>
+          <div class="flex flex-col gap-1">
+            <label class="text-[#94a3b8] font-semibold">Target 2</label>
+            <input
+              type="number"
+              id="target2"
+              class="desktop-input w-full text-right"
+              value="0"
+              step="0.05"
+            />
+          </div>
+          <div class="flex flex-col gap-1">
+            <label class="text-[#94a3b8] font-semibold">Stop Loss</label>
+            <input
+              type="number"
+              id="stopLoss"
+              class="desktop-input w-full text-right"
+              value="0"
+              step="0.05"
+            />
+          </div>
+          <div class="flex flex-col gap-1">
+            <label class="text-[#94a3b8] font-semibold">Product Type</label>
+            <select id="productType" class="desktop-select w-full">
+              <option>Investment</option>
+              <option>Intraday</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Bottom Row -->
+        <div class="flex flex-col sm:flex-row gap-3 sm:gap-0 items-start sm:items-end justify-between border-t border-[#262626] pt-3 mt-3">
+          <div class="flex gap-4">
+            <div class="flex flex-col gap-1">
+              <label class="text-[10px] font-semibold text-[#94a3b8]">Order Date</label>
+              <input
+                type="date"
+                id="orderDate"
+                class="desktop-input w-36 font-semibold cursor-pointer"
+              />
+            </div>
+          </div>
+
+          <div class="flex gap-2">
+            <button class="desktop-btn font-bold px-6 py-1.5" id="placeOrderBtn">
+              Place Order
+            </button>
+            <button class="desktop-btn px-6 py-1.5 bg-[#262626] hover:bg-[#333] border border-[#3c3c3c] text-white shadow-none" id="clearOrderBtn" style="background: #262626; box-shadow: none;">
+              Clear
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div
+      id="toastContainer"
+      class="fixed bottom-4 right-4 z-50 flex flex-col gap-2 pointer-events-none"
+    ></div>
+
+    <script src="config.js"></script>
+    <script src="script.js?v=1.3"></script>
+  </body>
+</html>

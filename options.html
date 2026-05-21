@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Terminal - Stock Streets</title>
+    <link rel="icon" type="image/png" href="logo.png" />
+    <link rel="stylesheet" href="auth.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <script>
+        // Auth Guard
+        if (localStorage.getItem("isLoggedIn") !== "true") {
+            window.location.href = "login.html";
+        }
+    </script>
+</head>
+<body>
+    <main class="options-wrapper">
+        <div class="top-nav-bar animate-fade-in-up delay-1">
+            <span class="user-display">Logged in as <strong id="userNameDisplay">Trader</strong></span>
+            <button id="logoutBtn" class="logout-btn-top">
+                Logout
+                <span class="material-symbols-outlined" style="font-size: 15px;">logout</span>
+            </button>
+        </div>
+
+        <div class="brand-header animate-fade-in-up delay-1" style="margin-bottom: 24px;">
+            <div class="logo-container">
+                <img src="logo.png" alt="Stock Streets" class="auth-logo" />
+            </div>
+        </div>
+
+        <div class="options-title-wrapper animate-fade-in-up delay-2">
+            <h1>Select Terminal Workspace</h1>
+            <p>Choose an environment to begin monitoring and trading</p>
+        </div>
+
+        <div class="options-grid animate-fade-in-up delay-3">
+            <!-- Call Book (Unlocked Dashboard) -->
+            <a href="dashboard.html" class="option-card">
+                <span class="material-symbols-outlined card-icon">menu_book</span>
+                <h3>Call Book</h3>
+                <p>Access the main trading dashboard, monitor live indices, configure call parameters, and execute trades instantly.</p>
+            </a>
+
+            <!-- Strategy Builder (Locked) -->
+            <div class="option-card locked">
+                <div class="badge-coming-soon">
+                    <span class="material-symbols-outlined">lock</span>
+                    Coming Soon
+                </div>
+                <span class="material-symbols-outlined card-icon">psychology</span>
+                <h3>Strategy Builder</h3>
+                <p>Design, build, and optimize custom trading strategies using our drag-and-drop rule engine.</p>
+            </div>
+
+            <!-- Backtesting Hub (Locked) -->
+            <div class="option-card locked">
+                <div class="badge-coming-soon">
+                    <span class="material-symbols-outlined">lock</span>
+                    Coming Soon
+                </div>
+                <span class="material-symbols-outlined card-icon">history</span>
+                <h3>Backtesting Hub</h3>
+                <p>Run historical simulations of your strategies against years of tick-level market data.</p>
+            </div>
+
+            <!-- API Terminal (Locked) -->
+            <div class="option-card locked">
+                <div class="badge-coming-soon">
+                    <span class="material-symbols-outlined">lock</span>
+                    Coming Soon
+                </div>
+                <span class="material-symbols-outlined card-icon">terminal</span>
+                <h3>API Terminal</h3>
+                <p>Integrate third-party platforms, write custom automated scripts, and manage active webhooks.</p>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="auth-bg.js"></script>
+    <script>
+        // Display full name from localStorage
+        const fullName = localStorage.getItem("full_name");
+        if (fullName) {
+            document.getElementById("userNameDisplay").textContent = fullName;
+        }
+
+        // Logout logic
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            localStorage.removeItem("isLoggedIn");
+            localStorage.removeItem("user_id");
+            localStorage.removeItem("full_name");
+            window.location.href = "index.html";
+        });
+    </script>
+</body>
+</html>

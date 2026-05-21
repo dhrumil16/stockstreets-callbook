@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Forgot PIN</title>
+    <link rel="icon" type="image/png" href="logo.png" />
+
+    <!-- CSS -->
+    <link
+        rel="stylesheet"
+        href="auth.css"
+    >
+
+    <!-- GOOGLE FONTS -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap"
+        rel="stylesheet"
+    />
+
+    <!-- MATERIAL ICONS -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet"
+    />
+
+</head>
+
+<body>
+
+    <main class="container">
+
+        <div class="glass-card">
+
+            <!-- HEADER -->
+            <div class="brand-header animate-fade-in-up delay-1">
+                <div class="logo-container">
+                    <img src="logo.png" alt="Stock Streets" class="auth-logo" />
+                </div>
+            </div>
+
+
+            <!-- TITLE -->
+            <div class="forgot-title-wrapper animate-fade-in-up delay-2">
+
+                <h1 class="forgot-title">
+                    Reset Security PIN
+                </h1>
+
+                <p class="forgot-subtitle">
+
+                    Verify your email and create a new PIN
+
+                </p>
+
+            </div>
+
+
+            <!-- FORM -->
+            <form id="forgotPinForm">
+
+                <!-- ERROR BOX -->
+                <div
+                    id="formErrorSummary"
+                    class="error-summary"
+                ></div>
+
+
+                <!-- EMAIL -->
+                <div class="form-group animate-fade-in-up delay-3">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <span class="material-symbols-outlined icon">
+                            mail
+                        </span>
+
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="Enter your email"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- OTP SECTION -->
+                <div
+                    id="otpSection"
+                    style="display:none;"
+                >
+
+                    <div class="form-group">
+
+                        <label for="otpInput">
+                            Enter OTP
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span class="material-symbols-outlined icon">
+                                verified
+                            </span>
+
+                            <input
+                                type="text"
+                                id="otpInput"
+                                maxlength="6"
+                                placeholder="Enter 6 digit OTP"
+                                class="font-mono"
+                            >
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- NEW PIN -->
+                <div
+                    id="newPinSection"
+                    style="display:none;"
+                >
+
+                    <div class="form-group">
+
+                        <label for="newPin">
+                            Set New Security PIN
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span class="material-symbols-outlined icon">
+                                lock
+                            </span>
+
+                            <input
+                                type="password"
+                                id="newPin"
+                                maxlength="6"
+                                placeholder="Enter New PIN"
+                                class="font-mono"
+                            >
+
+                            <span
+                                class="material-symbols-outlined icon-right"
+                                id="toggleNewPin"
+                            >
+                                visibility
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- BUTTON -->
+                <button
+                    type="button"
+                    id="mainActionBtn"
+                    class="submit-btn animate-fade-in-up delay-4"
+                >
+
+                    Send OTP
+
+                    <span class="material-symbols-outlined">
+                        arrow_forward
+                    </span>
+
+                </button>
+
+            </form>
+
+
+            <!-- LOGIN -->
+            <div class="login-link animate-fade-in-up delay-5">
+
+                <p>
+
+                    Back to
+
+                    <a href="login.html">
+                        Login
+                    </a>
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- JS -->
+    <script src="config.js"></script>
+    <script src="auth-bg.js"></script>
+    <script src="forgotpin.js"></script>
+
+</body>
+
+</html>

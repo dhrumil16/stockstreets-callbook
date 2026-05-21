@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Form</title>
+    <link rel="icon" type="image/png" href="logo.png" />
+    <link rel="stylesheet" href="auth.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+</head>
+
+<body>
+
+    <main class="container">
+        <div class="glass-card">
+
+            <div class="brand-header animate-fade-in-up delay-1">
+                <div class="logo-container">
+                    <img src="logo.png" alt="Stock Streets" class="auth-logo" />
+                </div>
+            </div>
+
+            <form id="signupForm">
+                <div id="formErrorSummary" class="error-summary"></div>
+
+                <div class="form-group animate-fade-in-up delay-2">
+                    <label for="fullName">Full Name</label>
+                    <div class="input-wrapper">
+                        <span class="material-symbols-outlined icon">person</span>
+                        <input type="text" id="fullName" name="fullName" placeholder="Enter Your Full Name" required>
+                    </div>
+                </div>
+
+                <div class="form-group animate-fade-in-up delay-3">
+                    <label for="email">Email Address</label>
+                    <div class="email-verify-group">
+                        <div class="input-wrapper">
+                            <span class="material-symbols-outlined icon">mail</span>
+                            <input type="email" id="email" name="email" placeholder="Enter Your Email" required>
+                        </div>
+                        <button type="button" id="btnVerifyEmail" class="action-btn" disabled>Verify Email</button>
+                    </div>
+                </div>
+
+                <div class="form-group animate-fade-in-up delay-3" id="otpSection" style="display: none;">
+                    <label for="emailOtp">Enter Email OTP</label>
+                    <div class="email-verify-group">
+                        <div class="input-wrapper">
+                            <span class="material-symbols-outlined icon">domain_verification</span>
+                            <input type="text" id="emailOtp" name="emailOtp" class="font-mono" maxlength="6"
+                                placeholder="••••••">
+                        </div>
+                        <button type="button" id="btnVerifyOtp" class="action-btn">Verify</button>
+                    </div>
+                    <small id="otpStatusText" style="color: #0997d7; display: none; margin-top: 6px; font-size: 13px;">✓
+                        Email Verified Successfully!</small>
+                </div>
+
+                <div class="form-row animate-fade-in-up delay-4">
+                    <div class="form-group">
+                        <label for="mobileNumber">Mobile Number</label>
+                        <div class="input-wrapper">
+                            <span class="material-symbols-outlined icon">smartphone</span>
+                            <input type="tel" id="mobileNumber" name="mobileNumber" placeholder="1234567890"
+                                maxlength="10" pattern="\d{10}" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="DOB">Date of Birth</label>
+                        <div class="input-wrapper">
+                            <span class="material-symbols-outlined icon">calendar_month</span>
+                            <input type="date" id="DOB" name="DOB" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row animate-fade-in-up delay-4">
+                    <div class="form-group">
+                        <label for="city">City</label>
+                        <div class="input-wrapper">
+                            <span class="material-symbols-outlined icon">location_city</span>
+                            <input type="text" id="city" name="city" placeholder="Enter Your City" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="pinCode">PIN Code / Zip</label>
+                        <div class="input-wrapper">
+                            <span class="material-symbols-outlined icon">tag</span>
+                            <input type="text" id="pinCode" name="pinCode" placeholder="Enter Your Pincode" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group animate-fade-in-up delay-5">
+                    <label for="pin">Security PIN (6 Digits)</label>
+                    <div class="input-wrapper">
+                        <span class="material-symbols-outlined icon">lock</span>
+                        <input type="password" id="pin" name="pin" class="font-mono" maxlength="6" placeholder="••••••"
+                            required>
+                        <span class="material-symbols-outlined icon-right" id="togglePin">visibility</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn animate-fade-in-up delay-6">
+                    Create Account
+                    <span class="material-symbols-outlined">arrow_forward</span>
+                </button>
+            </form>
+
+            <div class="login-link animate-fade-in-up delay-6">
+                <p>Already have an account? <a href="login.html">Login</a></p>
+            </div>
+
+        </div>
+    </main>
+    <script src="config.js"></script>
+    <script src="auth-bg.js"></script>
+    <script src="signup.js"></script>
+</body>
+
+</html>

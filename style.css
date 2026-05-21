@@ -1,0 +1,682 @@
+/* =========================================
+   STOCK STREETS - PREMIUM TRADING TERMINAL STYLE
+   ========================================= */
+
+:root {
+  --bg-dark: #121212;
+  --bg-darker: #080808;
+  --bg-panel: #181818;
+  --bg-card: rgba(26, 26, 26, 0.8);
+  --border-color: #242424;
+  --text-light: #f8fafc;
+  --text-muted: #64748b;
+  --highlight: rgba(9, 151, 215, 0.06); /* Blue tinted row hover */
+  
+  --buy-green: #22c55e;
+  --buy-green-light: #4ade80;
+  --sell-red: #b91c1c;
+  --sell-red-light: #ef4444;
+  
+  --modal-title-bg: #1a1a1a;
+  --modal-title-text: #ffffff;
+  --primary: #0997d7;
+}
+
+/* =========================================
+   GLOBAL RESET & TYPOGRAPHY
+   ========================================= */
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  overflow: hidden; /* App-like feel */
+  line-height: 1.5;
+}
+
+/* Custom Scrollbar for sleek trading feel */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-darker);
+  border-left: 1px solid var(--border-color);
+}
+::-webkit-scrollbar-thumb {
+  background: #2a2a2a;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3a3a3a;
+}
+
+/* Hide scrollbar utility for scrollable headers/tabs */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* =========================================
+   MODERN DESKTOP FORM CONTROLS
+   ========================================= */
+.desktop-input {
+  background-color: #121212;
+  color: var(--white, #ffffff);
+  border: 1px solid var(--border-color);
+  padding: 6px 12px;
+  font-size: 12px;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  height: 32px;
+  box-sizing: border-box;
+}
+.desktop-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(9, 151, 215, 0.15);
+}
+.desktop-input[readonly] {
+  background-color: #0f0f0f;
+  color: var(--text-muted);
+  border-color: #1e1e1e;
+  cursor: not-allowed;
+}
+
+.desktop-select {
+  background-color: #121212;
+  color: var(--white, #ffffff);
+  border: 1px solid var(--border-color);
+  padding: 6px 12px;
+  font-size: 12px;
+  border-radius: 8px;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  height: 32px;
+  box-sizing: border-box;
+}
+.desktop-select:focus {
+  border-color: var(--primary);
+}
+.desktop-select:disabled {
+  background-color: #0f0f0f;
+  color: var(--text-muted);
+  border-color: #1e1e1e;
+  cursor: not-allowed;
+}
+
+/* =========================================
+   MODERN DESKTOP BUTTONS
+   ========================================= */
+.desktop-btn {
+  background: linear-gradient(135deg, var(--primary), #077eb5);
+  border: none;
+  color: #ffffff;
+  padding: 0 14px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 12px rgba(9, 151, 215, 0.15);
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+.desktop-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(9, 151, 215, 0.25);
+}
+.desktop-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+.desktop-btn:disabled {
+  background: #222222;
+  color: #555555;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+/* =========================================
+   TOOLBAR TAB BUTTONS
+   ========================================= */
+.nav-tab-btn {
+  background: #1a1a1a;
+  color: var(--text-muted);
+  border: 1px solid var(--border-color);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 7px 16px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+.nav-tab-btn:hover {
+  background: #242424;
+  color: #ffffff;
+  border-color: #333333;
+}
+.nav-tab-btn.active {
+  background: rgba(9, 151, 215, 0.1);
+  color: var(--primary);
+  border-color: var(--primary);
+  box-shadow: 0 0 10px rgba(9, 151, 215, 0.05);
+}
+
+/* =========================================
+   WORKSPACE TABS (SHEETS)
+   ========================================= */
+.workspace-tab-container {
+  display: flex;
+  background-color: var(--bg-dark);
+  padding-top: 6px;
+  padding-left: 12px;
+  border-bottom: 1px solid var(--border-color);
+}
+.workspace-tab {
+  background: #161616;
+  color: var(--text-muted);
+  padding: 7px 16px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border: 1px solid var(--border-color);
+  border-bottom: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 12px;
+  margin-right: 3px;
+  transition: all 0.2s;
+}
+.workspace-tab:hover {
+  background: #202020;
+  color: #ffffff;
+}
+.workspace-tab.active {
+  background: #1e1e1e;
+  color: var(--primary);
+  border-color: var(--border-color);
+  border-top: 2px solid var(--primary);
+  margin-bottom: -1px;
+  z-index: 10;
+  position: relative;
+}
+
+/* =========================================
+   COMPACT & SLEEK DATA TABLES
+   ========================================= */
+.market-watch-table {
+  min-width: 850px;
+}
+
+.market-watch-table th,
+.market-watch-table td {
+  padding: 9px 12px;
+  white-space: nowrap;
+  font-size: 13px;
+}
+
+.market-watch-table th {
+  background: #161616;
+  color: var(--text-muted);
+  border-right: 1px solid #222222;
+  border-bottom: 1px solid var(--border-color);
+  font-weight: 600;
+  text-align: left;
+}
+
+.market-watch-table tr {
+  border-bottom: 1px solid #1a1a1a;
+  transition: background-color 0.15s ease;
+}
+
+.market-watch-table tr:hover {
+  background-color: var(--highlight);
+}
+
+.market-watch-table td {
+  border-right: 1px solid #1a1a1a;
+  font-family: 'JetBrains Mono', monospace;
+  color: #e2e8f0;
+}
+
+/* Fonts override for non-numeric columns */
+.market-watch-table td:nth-child(1),
+.market-watch-table td:nth-child(2),
+.market-watch-table td:last-child {
+  font-family: 'Inter', sans-serif;
+}
+
+.market-watch-table td:nth-child(2) {
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* =========================================
+   MODAL WINDOW DIALOGS
+   ========================================= */
+.modal-title-bar {
+  background: #181818;
+  color: #ffffff;
+  padding: 12px 18px;
+  font-weight: 700;
+  font-size: 13px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.add-script-modal,
+.order-modal,
+#settingsModal {
+  background-color: rgba(24, 24, 24, 0.95);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+  color: #ffffff;
+}
+
+/* Buy/Sell top indicators for Order Modal */
+.order-modal.buy {
+  border-top: 4px solid var(--buy-green);
+}
+.order-modal.sell {
+  border-top: 4px solid var(--sell-red);
+}
+
+/* Order modal form label alignment */
+.order-modal label {
+  display: flex;
+  align-items: flex-end;
+  min-height: 28px;
+  padding-bottom: 2px;
+  line-height: 1.2;
+}
+
+/* =========================================
+   COLOR CODED PRICING DATA
+   ========================================= */
+.text-profit { 
+  color: var(--buy-green) !important; 
+}
+.text-loss { 
+  color: #ef4444 !important; 
+}
+
+/* =========================================
+   TABLE ACTION BUTTONS
+   ========================================= */
+.action-btn {
+  padding: 4px 9px;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+  color: #ffffff;
+  transition: all 0.2s ease;
+}
+.action-btn.buy { 
+  background-color: var(--buy-green); 
+  box-shadow: 0 2px 6px rgba(9, 151, 215, 0.2);
+}
+.action-btn.buy:hover { 
+  background-color: var(--buy-green-light);
+  transform: translateY(-0.5px);
+}
+.action-btn.sell { 
+  background-color: var(--sell-red); 
+  box-shadow: 0 2px 6px rgba(239, 68, 68, 0.2);
+}
+.action-btn.sell:hover { 
+  background-color: var(--sell-red-light);
+  transform: translateY(-0.5px);
+}
+.action-btn.delete { 
+  background-color: #242424; 
+  color: var(--text-muted);
+  border: 1px solid #333333;
+}
+.action-btn.delete:hover { 
+  background-color: #333333; 
+  color: #ffffff;
+}
+
+/* =========================================
+   SEARCH RESULTS STYLING
+   ========================================= */
+#searchResultsBody tr {
+  cursor: pointer;
+  border-bottom: 1px solid #262626;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  color: #ffffff;
+}
+
+#searchResultsBody tr:hover {
+  background-color: rgba(9, 151, 215, 0.1);
+}
+
+#searchResultsBody tr.selected {
+  background-color: var(--primary) !important;
+  color: #000000 !important;
+}
+
+#searchResultsBody tr.selected:hover {
+  background-color: var(--primary) !important;
+  color: #000000 !important;
+}
+
+/* =========================================
+   UTILITIES
+   ========================================= */
+.hidden { 
+  display: none !important; 
+}
+
+/* =========================================
+   PROFIT AND LOSS UTILITIES
+   ========================================= */
+.bg-profit {
+  background-color: #15803d !important;
+  color: #ffffff !important;
+}
+.bg-loss {
+  background-color: var(--sell-red) !important;
+  color: #ffffff !important;
+}
+
+/* =========================================
+   LIGHT MODE SYSTEM & OVERRIDES
+   ========================================= */
+body.light-mode {
+  --bg-dark: #f8fafc;
+  --bg-darker: #f1f5f9;
+  --bg-panel: #ffffff;
+  --bg-card: rgba(255, 255, 255, 0.9);
+  --border-color: #e2e8f0;
+  --text-light: #0f172a;
+  --text-muted: #64748b;
+  --highlight: rgba(9, 151, 215, 0.08);
+  
+  --modal-title-bg: #e2e8f0;
+  --modal-title-text: #0f172a;
+  
+  background-color: var(--bg-dark) !important;
+  color: var(--text-light) !important;
+}
+
+/* Force override classes for elements using inline Tailwind background / text classes */
+body.light-mode header,
+body.light-mode header div.bg-\[\#121212\],
+body.light-mode header div.bg-\[\#181818\],
+body.light-mode main.bg-\[\#1e1e1e\],
+body.light-mode footer.bg-\[\#2a2a2a\],
+body.light-mode #settingsModal,
+body.light-mode #addScriptModal,
+body.light-mode #orderModal {
+  background-color: var(--bg-panel) !important;
+  color: var(--text-light) !important;
+  border-color: var(--border-color) !important;
+}
+
+/* Specific elements background adjustments */
+body.light-mode header {
+  background-color: var(--bg-dark) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+}
+body.light-mode header div.flex.items-center.justify-between.px-4.py-2 {
+  background-color: var(--bg-dark) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+}
+
+/* Ticker container inside header */
+body.light-mode header div.bg-\[\#1e1e1e\] {
+  background-color: var(--bg-panel) !important;
+  border-color: var(--border-color) !important;
+}
+body.light-mode header div.bg-\[\#1e1e1e\] span.text-gray-600 {
+  color: var(--border-color) !important;
+}
+
+/* Toolbar row */
+body.light-mode header div.bg-\[\#181818\] {
+  background-color: var(--bg-darker) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+}
+
+/* Workspace sheets tab bar & active sheets */
+body.light-mode .workspace-tab-container {
+  background-color: var(--bg-dark) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+}
+body.light-mode .workspace-tab {
+  background: var(--bg-darker);
+  border-color: var(--border-color);
+  color: var(--text-muted);
+}
+body.light-mode .workspace-tab:hover {
+  background: var(--bg-panel);
+  color: var(--text-light);
+}
+body.light-mode .workspace-tab.active {
+  background: var(--bg-panel);
+  color: var(--primary);
+  border-color: var(--border-color);
+  border-top: 2px solid var(--primary);
+}
+
+/* Dropdown Menu */
+body.light-mode #nseDropdownMenu {
+  background-color: var(--bg-panel) !important;
+  border-color: var(--border-color) !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1) !important;
+}
+body.light-mode #nseDropdownMenu a {
+  color: var(--text-light) !important;
+  border-bottom-color: var(--border-color) !important;
+}
+body.light-mode #nseDropdownMenu a:hover {
+  background-color: rgba(9, 151, 215, 0.1) !important;
+}
+
+/* Toolbar Buttons */
+body.light-mode .nav-tab-btn {
+  background: var(--bg-panel);
+  border-color: var(--border-color);
+  color: var(--text-muted);
+}
+body.light-mode .nav-tab-btn:hover {
+  background: var(--bg-darker);
+  color: var(--text-light);
+  border-color: var(--border-color);
+}
+body.light-mode .nav-tab-btn.active {
+  background: rgba(9, 151, 215, 0.1);
+  color: var(--primary);
+  border-color: var(--primary);
+}
+body.light-mode button#openAddScriptBtn,
+body.light-mode button#settingsBtn {
+  color: var(--text-muted) !important;
+}
+body.light-mode button#openAddScriptBtn span,
+body.light-mode button#settingsBtn span {
+  color: var(--text-light) !important;
+}
+body.light-mode button#openAddScriptBtn:hover,
+body.light-mode button#settingsBtn:hover {
+  background-color: var(--bg-darker) !important;
+  border-color: var(--border-color) !important;
+}
+
+/* Tables visual adjustments */
+body.light-mode .market-watch-table th {
+  background: var(--bg-darker);
+  color: var(--text-muted);
+  border-right: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+body.light-mode .market-watch-table tr {
+  border-bottom: 1px solid var(--border-color);
+}
+body.light-mode .market-watch-table td {
+  border-right: 1px solid var(--border-color);
+  color: var(--text-light);
+}
+body.light-mode .market-watch-table tr:hover {
+  background-color: var(--highlight) !important;
+}
+
+/* Footer elements */
+body.light-mode footer.bg-\[\#2a2a2a\] {
+  background-color: var(--bg-darker) !important;
+  border-top-color: var(--border-color) !important;
+  color: var(--text-muted) !important;
+}
+
+/* Modals overlays & properties */
+body.light-mode .modal-title-bar {
+  background: var(--modal-title-bg) !important;
+  color: var(--modal-title-text) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+}
+body.light-mode #settingsModal h3,
+body.light-mode #settingsModal label,
+body.light-mode #settingsModal h3 + div label,
+body.light-mode #addScriptModal label,
+body.light-mode #orderModal label,
+body.light-mode #orderModalTopBar span {
+  color: var(--text-light) !important;
+}
+body.light-mode #profileFullName {
+  background-color: var(--bg-darker) !important;
+  color: var(--text-light) !important;
+  border-color: var(--border-color) !important;
+}
+body.light-mode #profileUserId {
+  background-color: var(--bg-dark) !important;
+  color: var(--text-muted) !important;
+  border-color: var(--border-color) !important;
+}
+
+/* Add Script Modal specific overrides */
+body.light-mode #addScriptModal div.bg-\[\#121212\] {
+  background-color: var(--bg-darker) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-light) !important;
+}
+body.light-mode #addScriptModal thead.bg-\[\#181818\] {
+  background-color: var(--bg-dark) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+}
+body.light-mode #addScriptModal thead.bg-\[\#181818\] th {
+  border-right: 1px solid var(--border-color) !important;
+}
+body.light-mode #searchResultsBody tr {
+  border-bottom: 1px solid var(--border-color) !important;
+  color: var(--text-light) !important;
+}
+body.light-mode #searchResultsBody tr:hover {
+  background-color: rgba(9, 151, 215, 0.1) !important;
+}
+body.light-mode #searchResultsBody tr.selected {
+  background-color: var(--primary) !important;
+  color: #ffffff !important;
+}
+
+/* Order Modal overrides */
+body.light-mode #orderModalTopBar {
+  background-color: var(--modal-title-bg) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+}
+body.light-mode #orderModal div.bg-\[\#1a1a1a\] {
+  background-color: var(--bg-panel) !important;
+}
+body.light-mode #orderModal div.border-t.border-\[\#262626\] {
+  border-color: var(--border-color) !important;
+}
+body.light-mode #orderModal span.text-\[\#94a3b8\] {
+  color: var(--text-muted) !important;
+}
+
+/* Form inputs & selects */
+body.light-mode .desktop-input,
+body.light-mode .desktop-select {
+  background-color: var(--bg-darker) !important;
+  color: var(--text-light) !important;
+  border-color: var(--border-color) !important;
+}
+body.light-mode .desktop-input[readonly],
+body.light-mode .desktop-select:disabled {
+  background-color: var(--bg-dark) !important;
+  color: var(--text-muted) !important;
+}
+
+/* Reports / Order History View */
+body.light-mode #reportsContainer div.workspace-tab-container {
+  background-color: var(--bg-panel) !important;
+  border-bottom: none !important;
+}
+body.light-mode #reportsContainer .workspace-tab.active {
+  background-color: var(--bg-panel) !important;
+  border-bottom: none !important;
+}
+body.light-mode #reportsContainer button#exportExcelBtn {
+  background-color: rgba(9, 151, 215, 0.1) !important;
+}
+body.light-mode #reportsContainer button#exportExcelBtn:hover {
+  background-color: rgba(9, 151, 215, 0.2) !important;
+}
+
+/* Settings Toggle Button override in light mode */
+body.light-mode #themeToggleBtn {
+  background-color: var(--bg-darker) !important;
+  color: var(--text-light) !important;
+  border-color: var(--border-color) !important;
+}
+body.light-mode #themeToggleBtn:hover {
+  background-color: var(--bg-dark) !important;
+}
+
+/* Custom Scrollbars for light mode */
+body.light-mode ::-webkit-scrollbar-track {
+  background: var(--bg-darker) !important;
+  border-left: 1px solid var(--border-color) !important;
+}
+body.light-mode ::-webkit-scrollbar-thumb {
+  background: #cbd5e1 !important;
+}
+body.light-mode ::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8 !important;
+}
+
+/* Dropdown option overrides */
+body.light-mode .desktop-select option {
+  background-color: var(--bg-panel) !important;
+  color: var(--text-light) !important;
+}
+
+/* Create New Sheet button and general workspace tabs */
+body.light-mode .workspace-tab,
+body.light-mode .workspace-tab.flex.items-center {
+  background-color: var(--bg-darker) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-light) !important;
+}
+body.light-mode .workspace-tab.active {
+  background-color: var(--bg-panel) !important;
+  color: var(--primary) !important;
+}
+body.light-mode .workspace-tab.flex.items-center:hover {
+  background-color: rgba(9, 151, 215, 0.1) !important;
+  color: var(--primary) !important;
+}
+
