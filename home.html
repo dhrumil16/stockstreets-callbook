@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Stock Streets - Premium Trading Ecosystem</title>
-    <link rel="icon" type="image/png" href="logo.png" />
+    <link rel="icon" type="image/jpeg" href="favicon.jpeg" />
     <link rel="stylesheet" href="landing.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap"
@@ -33,8 +33,8 @@
           </ul>
         </nav>
         <div class="nav-actions">
-          <a href="login.html" class="btn-login">Login</a>
-          <a href="signup.html" class="btn-primary">Signup</a>
+          <a href="login" class="btn-login">Login</a>
+          <a href="signup" class="btn-primary">Signup</a>
         </div>
       </div>
     </header>
@@ -129,7 +129,7 @@
               advanced indicators, fast execution pipelines, and automated
               strategy triggers.
             </p>
-            <a href="signup.html" class="hub-link">
+            <a href="signup" class="hub-link">
               Click to Know More
               <span class="material-symbols-outlined">arrow_right_alt</span>
             </a>
@@ -143,7 +143,7 @@
               market. Build long-term wealth, manage portfolios, and get
               intelligent alerts.
             </p>
-            <a href="signup.html" class="hub-link">
+            <a href="signup" class="hub-link">
               Click to Know More
               <span class="material-symbols-outlined">arrow_right_alt</span>
             </a>
@@ -234,7 +234,7 @@
         e.preventDefault();
         const mobileNumber = ctaMobile.value;
         if (mobileNumber.length === 10) {
-          window.location.href = `signup.html?mobile=${encodeURIComponent(mobileNumber)}`;
+          window.location.href = `signup?mobile=${encodeURIComponent(mobileNumber)}`;
         } else {
           alert("Please enter a valid 10-digit mobile number.");
         }

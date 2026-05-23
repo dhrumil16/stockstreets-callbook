@@ -234,7 +234,7 @@ if (loginForm) {
 
                     // NAVIGATE
 
-                    window.location.href = "options.html";
+                    window.location.href = "options";
 
                 }
 

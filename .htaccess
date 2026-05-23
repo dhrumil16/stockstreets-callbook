@@ -1,0 +1,10 @@
+RewriteEngine On
+DirectoryIndex home.html
+
+# 1. Redirect any direct request for an .html file to the clean URL (without .html)
+RewriteCond %{THE_REQUEST} /([^.]+)\.html [NC]
+RewriteRule ^ /%1 [NC,L,R=301]
+
+# 2. When a clean URL is requested, internally serve the actual .html file
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^ %{REQUEST_URI}.html [NC,L]

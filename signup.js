@@ -581,7 +581,7 @@ if (signupForm) {
 
                     // Redirect
                     window.location.href =
-                        "login.html";
+                        "login";
 
                 } else {
 

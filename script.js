@@ -1,6 +1,6 @@
 // Auth Guard
 if (localStorage.getItem("isLoggedIn") !== "true") {
-  window.location.href = "login.html";
+  window.location.href = "login";
 }
 
 // State for APIs
@@ -186,7 +186,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("user_id");
     localStorage.removeItem("full_name");
-    window.location.href = "index.html";
+    window.location.href = "home";
   });
 
   // Event Listeners for Top Navbar
@@ -825,8 +825,9 @@ async function placeOrder() {
 
     const diffPercent = ((target1 - entryPrice) / entryPrice) * 100;
     if (diffPercent < 5 || diffPercent > 10) {
+      const minTarget = (entryPrice + entryPrice * 0.05).toFixed(2);
       showToast(
-        `Validation Error: Difference between Entry Price and Target 1 must be between 5% and 10%. (Currently ${diffPercent.toFixed(2)}%)`,
+        `Validation Error: Difference between Entry Price and Target 1 must be between 5% and 10%. (Minimum target should be ₹${minTarget})`,
         "error",
       );
       return;
@@ -857,8 +858,9 @@ async function placeOrder() {
 
     const diffPercent = ((entryPrice - target1) / entryPrice) * 100;
     if (diffPercent < 5 || diffPercent > 10) {
+      const maxTarget = (entryPrice - entryPrice * 0.05).toFixed(2);
       showToast(
-        `Validation Error: Difference between Entry Price and Target 1 must be between 5% and 10%. (Currently ${diffPercent.toFixed(2)}%)`,
+        `Validation Error: Difference between Entry Price and Target 1 must be between 5% and 10%. (Minimum target should be ₹${maxTarget})`,
         "error",
       );
       return;
@@ -1149,90 +1151,28 @@ async function fetchLiveIndices() {
   let sensexData = null;
   let bankniftyData = null;
 
-  // 1. Try fetching from the local marketwatch API
+  // Strictly fetch indices from TradingView Live Scanner API (Real-time, No Delay)
   try {
-    const response = await fetch(`${CONFIG.API_BASE_URL}/marketwatch`);
+    const response = await fetch('https://scanner.tradingview.com/india/scan', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: JSON.stringify({
+        symbols: { tickers: ["BSE:SENSEX", "NSE:NIFTY", "NSE:BANKNIFTY"] },
+        columns: ["close", "change"]
+      })
+    });
     if (response.ok) {
-      const data = await response.json();
-      const list = data.Data || data || [];
-      
-      // Look for Nifty Candidates
-      const niftyCandidates = [
-        "NIFTY50_ETF", "Nifty50_ETF", "NIFTY_50_ETF", "NIFTY50", "NIFTY 50", "NIFTY_50", "NIFTY", "NIFTYBEES"
-      ];
-      let niftyItem = list.find(item => niftyCandidates.includes(item.Symbol));
-      if (!niftyItem && list.length > 0) {
-        niftyItem = list.find(item => item.Symbol && item.Symbol.toLowerCase().includes("nifty") && !item.Symbol.toLowerCase().includes("bank"));
-      }
-
-      // Look for Sensex Candidates
-      const sensexCandidates = [
-        "SENSEX_ETF", "Sensex_ETF", "SENSEX_30_ETF", "SENSEX", "SENSEX 30", "SENSEX_30", "Sensex"
-      ];
-      let sensexItem = list.find(item => sensexCandidates.includes(item.Symbol));
-      if (!sensexItem && list.length > 0) {
-        sensexItem = list.find(item => item.Symbol && item.Symbol.toLowerCase().includes("sensex"));
-      }
-
-      // Look for Bank Nifty Candidates
-      const bankniftyCandidates = [
-        "BANKNIFTY", "BANK_NIFTY", "NIFTYBANK", "NIFTY BANK", "NIFTY_BANK", "BANKNIFTY_ETF", "BANKBEES"
-      ];
-      let bankniftyItem = list.find(item => bankniftyCandidates.includes(item.Symbol));
-      if (!bankniftyItem && list.length > 0) {
-        bankniftyItem = list.find(item => item.Symbol && (item.Symbol.toLowerCase().includes("banknifty") || item.Symbol.toLowerCase().includes("niftybank") || item.Symbol.toLowerCase().includes("bankbees")));
-      }
-
-      if (niftyItem) {
-        const close = parseFloat(niftyItem.Close) || 0;
-        const diff = parseFloat(niftyItem.Diff) || 0;
-        const scale = close < 1000 ? 100 : 1;
-        niftyData = { close: close * scale, diff: diff * scale };
-      }
-
-      if (sensexItem) {
-        const close = parseFloat(sensexItem.Close) || 0;
-        const diff = parseFloat(sensexItem.Diff) || 0;
-        const scale = close < 1000 ? 100 : 1;
-        sensexData = { close: close * scale, diff: diff * scale };
-      }
-
-      if (bankniftyItem) {
-        const close = parseFloat(bankniftyItem.Close) || 0;
-        const diff = parseFloat(bankniftyItem.Diff) || 0;
-        const scale = close < 1000 ? 100 : 1;
-        bankniftyData = { close: close * scale, diff: diff * scale };
+      const json = await response.json();
+      if (json && json.data) {
+        json.data.forEach(item => {
+          if (item.s === "NSE:NIFTY") niftyData = { close: item.d[0], diff: item.d[1] };
+          if (item.s === "BSE:SENSEX") sensexData = { close: item.d[0], diff: item.d[1] };
+          if (item.s === "NSE:BANKNIFTY") bankniftyData = { close: item.d[0], diff: item.d[1] };
+        });
       }
     }
   } catch (err) {
-    console.warn("Local marketwatch fetch failed or timed out. Falling back to Yahoo Finance.", err);
-  }
-
-  // 2. If local API didn't provide Nifty data, fetch from Yahoo Finance
-  if (!niftyData) {
-    try {
-      niftyData = await fetchYahooIndex("^NSEI");
-    } catch (err) {
-      console.error("Failed to fetch Nifty from Yahoo Finance:", err);
-    }
-  }
-
-  // 3. If local API didn't provide Sensex data, fetch from Yahoo Finance
-  if (!sensexData) {
-    try {
-      sensexData = await fetchYahooIndex("^BSESN");
-    } catch (err) {
-      console.error("Failed to fetch Sensex from Yahoo Finance:", err);
-    }
-  }
-
-  // 4. If local API didn't provide Bank Nifty data, fetch from Yahoo Finance
-  if (!bankniftyData) {
-    try {
-      bankniftyData = await fetchYahooIndex("^NSEBANK");
-    } catch (err) {
-      console.error("Failed to fetch Bank Nifty from Yahoo Finance:", err);
-    }
+    console.error("Failed to fetch live indices from TradingView:", err);
   }
 
   // 5. Update UI
@@ -1261,19 +1201,5 @@ async function fetchLiveIndices() {
   }
 }
 
-async function fetchYahooIndex(symbol) {
-  const url = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(symbol)}`;
-  const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
-  if (!response.ok) throw new Error(`Yahoo fetch failed for ${symbol}`);
-  const json = await response.json();
-  const data = JSON.parse(json.contents);
-  if (!data || !data.chart || !data.chart.result || !data.chart.result[0]) {
-    throw new Error(`Invalid data structure from Yahoo Finance for ${symbol}`);
-  }
-  const meta = data.chart.result[0].meta;
-  const close = meta.regularMarketPrice || 0;
-  const prevClose = meta.previousClose || 0;
-  const diff = close - prevClose;
-  return { close, diff };
-}
+// Removed fetchYahooIndex in favor of TradingView live scanner
 

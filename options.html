@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Select Terminal - Stock Streets</title>
-    <link rel="icon" type="image/png" href="logo.png" />
+    <link rel="icon" type="image/jpeg" href="favicon.jpeg" />
     <link rel="stylesheet" href="auth.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
     <script>
         // Auth Guard
         if (localStorage.getItem("isLoggedIn") !== "true") {
-            window.location.href = "login.html";
+            window.location.href = "login";
         }
     </script>
 </head>
@@ -39,7 +39,7 @@
 
         <div class="options-grid animate-fade-in-up delay-3">
             <!-- Call Book (Unlocked Dashboard) -->
-            <a href="dashboard.html" class="option-card">
+            <a href="dashboard" class="option-card">
                 <span class="material-symbols-outlined card-icon">menu_book</span>
                 <h3>Call Book</h3>
                 <p>Access the main trading dashboard, monitor live indices, configure call parameters, and execute trades instantly.</p>
@@ -94,7 +94,7 @@
             localStorage.removeItem("isLoggedIn");
             localStorage.removeItem("user_id");
             localStorage.removeItem("full_name");
-            window.location.href = "index.html";
+            window.location.href = "home";
         });
     </script>
 </body>
